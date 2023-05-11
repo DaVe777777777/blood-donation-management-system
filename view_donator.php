@@ -62,6 +62,7 @@
     <th>Age</th>
     <th>Weight</th>
     <th>Actions</th>
+    <th>Status</th>
 
     
    
@@ -79,54 +80,38 @@ if(!empty($_SESSION['username']))
 $username = $_SESSION['username'];
 }
 
-include 'connection.php';
 
-// Assuming the user ID is available in a variable named $userID
-$userID = 1; // Replace with the actual user ID
 
-$sql = "SELECT * FROM donator WHERE id = $userID ORDER BY id DESC";
-$result = $conn->query($sql);
 
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        echo "<tr>";
-        echo "<td>" . $row['id'] . "</td>";
-        echo "<td>" . $row['blood_type'] . "</td>";
-        echo "<td>" . $row['age'] . "</td>";
-        echo "<td>" . $row['weight'] . "</td>";
-        echo "<td>
-                <a href='update.php?id=" . $row['id'] . "' class='btn btn-sm btn-warning'>Update</a>
-                <a href='delete.php?id=" . $row['id'] . "' onclick='return confirm(\"Are you sure?\")' class='btn btn-sm btn-danger'>Delete</a>
-            </td>";
-        echo "</tr>";
+    include 'connection.php';
+    $sql = "SELECT * FROM donator ORDER BY id DESC";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            echo "<tr>";
+            echo "<td>".$row['id']."</td>";
+            echo "<td>".$row['blood_type']."</td>";
+            echo "<td>".$row['age']."</td>";
+            echo "<td>".$row['weight']."</td>";
+            echo "<td>
+                    <a href='update.php?id=".$row['id']."' ' class='btn btn-sm btn-warning'>Update</a>
+                    <a href='delete.php?id=".$row['id']."' onclick='return confirm(\"Are you sure?\")' class='btn btn-sm btn-danger'>Delete</a>
+                </td>";
+                echo "<td>";
+                if ($row['status'] == 2) {
+                    echo "Accept";
+                } elseif ($row['status'] == 3) {
+                    echo "Reject";
+                } else {
+                    echo "Pending"; // Default status when value is empty or not 2 or 3
+                }
+                echo "</td>";
+            echo "</tr>";
+        }
+    } else {
+        echo "<tr><td colspan='10'>No records found</td></tr>";
     }
-} else {
-    echo "<tr><td colspan='10'>No records found</td></tr>";
-}
-
-$conn->close();
-
-
-    // include 'connection.php';
-    // $sql = "SELECT * FROM donator ORDER BY id DESC";
-    // $result = $conn->query($sql);
-    // if ($result->num_rows > 0) {
-    //     while($row = $result->fetch_assoc()) {
-    //         echo "<tr>";
-    //         echo "<td>".$row['id']."</td>";
-    //         echo "<td>".$row['blood_type']."</td>";
-    //         echo "<td>".$row['age']."</td>";
-    //         echo "<td>".$row['weight']."</td>";
-    //         echo "<td>
-    //                 <a href='update.php?id=".$row['id']."' ' class='btn btn-sm btn-warning'>Update</a>
-    //                 <a href='delete.php?id=".$row['id']."' onclick='return confirm(\"Are you sure?\")' class='btn btn-sm btn-danger'>Delete</a>
-    //             </td>";
-    //         echo "</tr>";
-    //     }
-    // } else {
-    //     echo "<tr><td colspan='10'>No records found</td></tr>";
-    // }
-    // $conn->close();
+    $conn->close();
 
 
 

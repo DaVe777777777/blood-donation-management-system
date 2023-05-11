@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>DONATORS LIST</title>
+  <title>REQUEST LIST</title>
   <meta charset="utf-8">
   <link rel="stylesheet" href="view_donator.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -50,19 +50,18 @@
     <h1 class="text-center">REQUEST LIST</h1>
     <hr color="red">
     <hr color="red">
-    <div class="d-flex justify-content-end">
-        <a href="donator.php" class="btn btn-primary">Add New Request</a>
-    </div>
+    
 
     <div class="table-responsive mt-4 ">
         <table class="table table-striped table-hover table-bordered">
         <tr>
-    <th scope="col-1">Id</th>
-    <th scope="col-1">Blood Type</th>
-    <th scope="col">Age</th>
-    <th scope="col">Weight</th>
-    <th scope="col">Actions</th>
-    <th scope="col-1">Status</th>
+    <th >Id</th>
+    <th >Blood Type</th>
+    <th >Age</th>
+    <th >Weight</th>
+    <th >Actions</th>
+    <th >Status</th>
+    <th >Actions</th>
 
 
     
@@ -81,60 +80,48 @@ if(!empty($_SESSION['username']))
 $username = $_SESSION['username'];
 }
 
+
+
+
 include 'connection.php';
-
-// Assuming the user ID is available in a variable named $userID
-$userID = 1; // Replace with the actual user ID
-
-$sql = "SELECT * FROM donator WHERE id = $userID ORDER BY id DESC";
+$sql = "SELECT * FROM donator ORDER BY id DESC";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
+    while($row = $result->fetch_assoc()) {
         echo "<tr>";
-        echo "<td>" . $row['id'] . "</td>";
-        echo "<td>" . $row['blood_type'] . "</td>";
-        echo "<td >" . $row['age'] . "</td>";
-        echo "<td >" . $row['weight'] . "</td>";
-        echo "<td >
-                <a href='update.php?id=" . $row['id'] . "' class='btn btn-sm btn-warning'>Update</a>
-                
+        echo "<td>".$row['id']."</td>";
+        echo "<td>".$row['blood_type']."</td>";
+        echo "<td>".$row['age']."</td>";
+        echo "<td>".$row['weight']."</td>";
+        echo "<td>
+                <a href='update.php?id=".$row['id']."' class='btn btn-sm btn-warning'>Update</a>
+                <a href='delete.php?id=".$row['id']."' onclick='return confirm(\"Are you sure?\")' class='btn btn-sm btn-danger'>Delete</a>
+            </td>";
+            echo "<td>";
+            if ($row['status'] == 2) {
+                echo "Accept";
+            } elseif ($row['status'] == 3) {
+                echo "Reject";
+            } else {
+                echo "Pending"; // Default status when value is empty or not 2 or 3
+            }
+            echo "</td>";
+        echo "<td>
+                <select onchange='updateStatus(".$row['id'].", this.value)'>
+                    <option value='1' >Pending</option>
+                    <option value='2' >Accepted</option>
+                    <option value='3' >Rejected</option>
+                </select>
             </td>";
         echo "</tr>";
-        echo "<td >
-                <a href='update.php?id=" . $row['id'] . "' class='btn btn-sm btn-warning'>Update</a>
-                <a href='delete.php?id=" . $row['id'] . "' onclick='return confirm(\"Are you sure?\")' class='btn btn-sm btn-danger'>Delete</a>
-            </td>";
-        echo "</tr>";
-       
     }
 } else {
-    echo "<tr><td colspan='10'>No records found</td></tr>";
+    echo "<tr><td colspan='7'>No records found</td></tr>";
 }
 
 $conn->close();
 
-
-    // include 'connection.php';
-    // $sql = "SELECT * FROM donator ORDER BY id DESC";
-    // $result = $conn->query($sql);
-    // if ($result->num_rows > 0) {
-    //     while($row = $result->fetch_assoc()) {
-    //         echo "<tr>";
-    //         echo "<td>".$row['id']."</td>";
-    //         echo "<td>".$row['blood_type']."</td>";
-    //         echo "<td>".$row['age']."</td>";
-    //         echo "<td>".$row['weight']."</td>";
-    //         echo "<td>
-    //                 <a href='update.php?id=".$row['id']."' ' class='btn btn-sm btn-warning'>Update</a>
-    //                 <a href='delete.php?id=".$row['id']."' onclick='return confirm(\"Are you sure?\")' class='btn btn-sm btn-danger'>Delete</a>
-    //             </td>";
-    //         echo "</tr>";
-    //     }
-    // } else {
-    //     echo "<tr><td colspan='10'>No records found</td></tr>";
-    // }
-    // $conn->close();
 
 
 
@@ -145,7 +132,32 @@ $conn->close();
     </div>
 </div>
 
+<script>
+function updateStatus(id, status) {
+    var confirmUpdate = confirm("Are you sure you want to update the status?");
+    if (confirmUpdate) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "update_status.php", true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                console.log(xhr.responseText); // Handle the response here (if needed)
+                window.location.reload(); // Auto-refresh the page
+            }
+        };
+        xhr.send("id=" + encodeURIComponent(id) + "&status=" + encodeURIComponent(status));
+    }
+}
+</script>
+
+
+
+
+
 <style>
+
+
+
 .header {
     
     width: 100%;
@@ -286,6 +298,9 @@ nav .bi {
             navLinks.style.right = "-200px";
         }
 </script>
+
+
+
 
 </body>
 </html>
