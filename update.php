@@ -25,15 +25,12 @@
         if(isset($_POST['submit'])) {
             // retrieve the form data
             $id = $_POST['id'];
-            $name = $_POST['name'];
-            $email = $_POST['email'];
-            $address = $_POST['address'];
             $blood_type = $_POST['blood_type'];
             $age = $_POST['age'];
             $weight = $_POST['weight'];
 
             // construct the update query
-            $sql = "UPDATE donator SET name='$name', email='$email', address='$address', blood_type='$blood_type', age='$age', weight='$weight' WHERE id=$id";
+            $sql = "UPDATE donator SET blood_type='$blood_type', age='$age', weight='$weight' WHERE id=$id";
 
             // execute the query
             // if ($conn->query($sql) === TRUE) {
@@ -73,9 +70,6 @@
             // retrieve the data from the query result
             if ($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
-                $name = $row['name'];
-                $email = $row['email'];
-                $address = $row['address'];
                 $blood_type = $row['blood_type'];
                 $age = $row['age'];
                 $weight = $row['weight'];
@@ -88,22 +82,25 @@
 
 <form method="post">
   <input type="hidden" name="id" value="<?php echo $id; ?>">
+
   <div class="form-group">
-    <label for="name">Name:</label>
-    <input type="text" class="form-control" id="name" name="name" value="<?php echo $name; ?>">
-  </div>
-  <div class="form-group">
-    <label for="email">Email:</label>
-    <input type="email" class="form-control" id="email" name="email" value="<?php echo $email; ?>">
-  </div>
-  <div class="form-group">
-    <label for="address">Address:</label>
-    <input type="text" class="form-control" id="address" name="address" value="<?php echo $address; ?>">
-  </div>
-  <div class="form-group">
-    <label for="blood_type">Blood Type:</label>
-    <input type="text" class="form-control" id="blood_type" name="blood_type" value="<?php echo $blood_type; ?>">
-  </div>
+      <label for="dropdown">Blood Type:</label>
+      <select id="dropdown"  class="form-control" name="blood_type" value="<?php echo $blood_type;?>">
+        <option>--SELECT--</option>
+        <option>A</option>
+        <option>B</option>
+        <option>AB</option>
+        <option>O</option>
+        <option>A+</option>
+        <option>B+</option>
+        <option>AB+</option>
+        <option>O+</option>
+        <option>A-</option>
+        <option>B-</option>
+        <option>AB-</option>
+        <option>O-</option>
+      </select>
+ </div>
   <div class="form-group">
     <label for="age">Age:</label>
     <input type="number" class="form-control" id="age" name="age" value="<?php echo $age; ?>">

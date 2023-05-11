@@ -33,8 +33,8 @@
             <ul>
             <li><a href="index.php">HOME</a></li>
                 <li><a href="requirements.php">REQUIREMENTS</a></li>
-                <li><a href="donator.php">REGISTRATION</a></li>
-                <li><a href="view_donator.php">DONATORS</a></li>
+                <li><a href="donator.php">DONATE</a></li>
+                <li><a href="view_donator.php">REQUEST</a></li>
                 <li ><a href="logout.php" class="logout-button">LOGOUT</a></li>
             </ul>
             </div>
@@ -43,24 +43,21 @@
 </section>
 
 <br><br>
-<div class="container mt-5">
+<div class="container mt-4">
     <a href="search.php" class="btn btn-primary">SEARCH<a>
     <hr color="red">
     <hr color="red">
-    <h1 class="text-center">DONATORS LIST</h1>
+    <h1 class="text-center">REQUEST LIST</h1>
     <hr color="red">
     <hr color="red">
     <div class="d-flex justify-content-end">
-        <a href="donator.php" class="btn btn-primary">Add New Donator</a>
+        <a href="donator.php" class="btn btn-primary">Add New Request</a>
     </div>
 
     <div class="table-responsive mt-4">
         <table class="table table-striped table-hover">
         <tr>
     <th>Id</th>
-    <th>Name</th>
-    <th>Email</th>
-    <th>Address</th>
     <th>Blood Type</th>
     <th>Age</th>
     <th>Weight</th>
@@ -82,29 +79,54 @@ if(!empty($_SESSION['username']))
 $username = $_SESSION['username'];
 }
 
-    include 'connection.php';
-    $sql = "SELECT * FROM donator ORDER BY id DESC";
-    $result = $conn->query($sql);
-    if ($result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
-            echo "<tr>";
-            echo "<td>".$row['id']."</td>";
-            echo "<td>".$row['name']."</td>";
-            echo "<td>".$row['email']."</td>";
-            echo "<td>".$row['address']."</td>";
-            echo "<td>".$row['blood_type']."</td>";
-            echo "<td>".$row['age']."</td>";
-            echo "<td>".$row['weight']."</td>";
-            echo "<td>
-                    <a href='update.php?id=".$row['id']."' ' class='btn btn-sm btn-warning'>Update</a>
-                    <a href='delete.php?id=".$row['id']."' onclick='return confirm(\"Are you sure?\")' class='btn btn-sm btn-danger'>Delete</a>
-                </td>";
-            echo "</tr>";
-        }
-    } else {
-        echo "<tr><td colspan='10'>No records found</td></tr>";
+include 'connection.php';
+
+// Assuming the user ID is available in a variable named $userID
+$userID = 1; // Replace with the actual user ID
+
+$sql = "SELECT * FROM donator WHERE id = $userID ORDER BY id DESC";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        echo "<tr>";
+        echo "<td>" . $row['id'] . "</td>";
+        echo "<td>" . $row['blood_type'] . "</td>";
+        echo "<td>" . $row['age'] . "</td>";
+        echo "<td>" . $row['weight'] . "</td>";
+        echo "<td>
+                <a href='update.php?id=" . $row['id'] . "' class='btn btn-sm btn-warning'>Update</a>
+                <a href='delete.php?id=" . $row['id'] . "' onclick='return confirm(\"Are you sure?\")' class='btn btn-sm btn-danger'>Delete</a>
+            </td>";
+        echo "</tr>";
     }
-    $conn->close();
+} else {
+    echo "<tr><td colspan='10'>No records found</td></tr>";
+}
+
+$conn->close();
+
+
+    // include 'connection.php';
+    // $sql = "SELECT * FROM donator ORDER BY id DESC";
+    // $result = $conn->query($sql);
+    // if ($result->num_rows > 0) {
+    //     while($row = $result->fetch_assoc()) {
+    //         echo "<tr>";
+    //         echo "<td>".$row['id']."</td>";
+    //         echo "<td>".$row['blood_type']."</td>";
+    //         echo "<td>".$row['age']."</td>";
+    //         echo "<td>".$row['weight']."</td>";
+    //         echo "<td>
+    //                 <a href='update.php?id=".$row['id']."' ' class='btn btn-sm btn-warning'>Update</a>
+    //                 <a href='delete.php?id=".$row['id']."' onclick='return confirm(\"Are you sure?\")' class='btn btn-sm btn-danger'>Delete</a>
+    //             </td>";
+    //         echo "</tr>";
+    //     }
+    // } else {
+    //     echo "<tr><td colspan='10'>No records found</td></tr>";
+    // }
+    // $conn->close();
 
 
 
@@ -148,7 +170,7 @@ nav img {
 .nav-links ul li a {
     color: #fff;
     text-decoration: none;
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .nav-links ul li a::after {

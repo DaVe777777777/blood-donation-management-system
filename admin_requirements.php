@@ -30,10 +30,10 @@ $username = $_SESSION['username'];
             <div class="nav-links" id="navLinks">
                 <i class="bi bi-x-lg" onclick="hideMenu()"></i>
             <ul>
-            <li><a href="dashboard.php">DASHBOARD</a></li>
+                <li><a href="dashboard.php">DASHBOARD</a></li>
                 <li><a href="donor.php">DONOR</a></li>
                 <li><a href="admin_requirements.php">REQUIREMENTS</a></li>
-                <li><a href="">REQUEST</a></li>
+                <li><a href="request.php">REQUEST</a></li>
                 <li ><a href="admin_logout.php" class="logout-button">LOGOUT</a></li>
             </ul>
             </div>

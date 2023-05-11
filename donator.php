@@ -44,8 +44,8 @@ $username = $_SESSION['username'];
                     <ul>
                         <li><a href="index.php">HOME</a></li>
                         <li><a href="requirements.php">REQUIREMENTS</a></li>
-                        <li><a href="donator.php">REGISTRATION</a></li>
-                        <li><a href="view_donator.php">DONATORS</a></li>
+                        <li><a href="donator.php">DONATE</a></li>
+                        <li><a href="view_donator.php">REQUEST</a></li>
                         <li ><a href="logout.php" class="logout-button">LOGOUT</a></li>
                     </ul>
             </div>
@@ -59,23 +59,13 @@ $username = $_SESSION['username'];
   <div class=" text-center">
   <hr color="red">
   <hr color="red">
-  <h2 >ADD NEW BLOOD DONATOR</h2>
+  <h2 >DONATE BLOOD</h2>
   <hr color="red">
   <hr color="red">
   <!-- <a href="logout.php" class="btn btn-danger p-3">Logout</a> -->
   </div>
   <form action="" method="post">
-  <div class="form-group">
-      <label>Name:</label>
-      <input type="text" class="form-control"  placeholder="Name" name="name" required>
-    </div><div class="form-group">
-      <label for="email">Email:</label>
-      <input type="email" class="form-control"  placeholder="Enter Email" name="email" required>
-    </div>
-    <div class="form-group">
-      <label for="address">Address:</label>
-      <input type="address" class="form-control"  placeholder="Enter Address" name="address" required>
-    </div>
+  
     <div class="form-group">
       <label for="dropdown">Blood Type:</label>
       <select id="dropdown"  class="form-control"  placeholder="Blood Type" name="blood_type" required>
@@ -117,9 +107,7 @@ $conn = mysqli_connect('localhost','root','','bdm_system');
 
 if(isset($_POST['insert-btn']))
 {
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $address = $_POST['address'];
+    
     $blood_type = $_POST['blood_type'];
     $age = $_POST['age'];
     $weight = $_POST['weight'];
@@ -151,7 +139,7 @@ if(isset($_POST['insert-btn']))
                 });
               </script>';
     } else {
-        $insert = "INSERT INTO donator(name,email,address,blood_type,age,weight) VALUES('$name','$email','$address','$blood_type','$age','$weight')";
+        $insert = "INSERT INTO donator(blood_type,age,weight) VALUES('$blood_type','$age','$weight')";
 
         $run_insert = mysqli_query($conn, $insert);
 
@@ -223,7 +211,7 @@ nav img {
 .nav-links ul li a {
     color: #fff;
     text-decoration: none;
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .nav-links ul li a::after {

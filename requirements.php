@@ -32,8 +32,8 @@ $username = $_SESSION['username'];
             <ul>
                 <li><a href="index.php">HOME</a></li>
                 <li><a href="requirements.php">REQUIREMENTS</a></li>
-                <li><a href="donator.php">REGISTRATION</a></li>
-                <li><a href="view_donator.php">DONATORS</a></li>
+                <li><a href="donator.php">DONATE</a></li>
+                <li><a href="view_donator.php">REQUEST</a></li>
                 <li ><a href="logout.php" class="logout-button">LOGOUT</a></li>
             </ul>
             </div>
@@ -207,7 +207,7 @@ nav img {
 .nav-links ul li {
     list-style: none;
     display: inline-block;
-    padding: 30px 12px;
+    padding: 32px 12px;
     position: relative;
 }
 .nav-links ul li a {
