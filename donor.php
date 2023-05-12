@@ -44,12 +44,27 @@
 
 <br><br>
 <div class="container mt-5">
-    <a href="search.php" class="btn btn-primary">SEARCH<a>
+   
+    
     <hr color="red">
     <hr color="red">
     <h1 class="text-center">DONATORS LIST</h1>
     <hr color="red">
     <hr color="red">
+
+    
+    
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <button class="btn btn-primary" type="button" onclick="searchDonators()">
+                <i class="bi bi-search"></i> <!-- Search icon from Bootstrap Icons -->
+            </button>
+            <button class="btn btn-danger" type="button" onclick="clearInput()">
+                <i class="bi bi-x"></i> <!-- X icon from Bootstrap Icons -->
+            </button>
+        </div>
+        <input type="text" id="searchInput" class="form-control" placeholder="Search" >
+    </div>
     
     <div class="table-responsive mt-4">
         <table class="table table-striped table-hover">
@@ -64,15 +79,15 @@
 
 <?php
 
-// session_start();
-// if(empty($_SESSION['username']))
-// {
-//     header('location:login.php');
-// }
-// if(!empty($_SESSION['username']))
-// {
-// $username = $_SESSION['username'];
-// }
+session_start();
+if(empty($_SESSION['username']))
+{
+    header('location:admin_login.php');
+}
+if(!empty($_SESSION['username']))
+{
+$username = $_SESSION['username'];
+}
 
     include 'connection.php';
     $sql = "SELECT * FROM users ORDER BY id DESC";
@@ -105,6 +120,8 @@
 </div>
 
 <style>
+
+
 .header {
     
     width: 100%;
@@ -187,14 +204,18 @@ nav .bi {
 
 
   @media (max-width: 768px) {
+
+    
+  
     .text-box h1 {
         font-size: 20px;
     }
     .nav-links ul li {
         display: block;
     }
-    .nav-links {
+    .nav-links{
         position: absolute;
+        
         background: red;
         height: 100vh;
         width: 200px;
@@ -235,6 +256,36 @@ nav .bi {
   background-color: #e74c3c;
 }
 </style>
+
+<script>
+    function searchDonators() {
+        var input = document.getElementById("searchInput").value.toLowerCase();
+        var table = document.querySelector(".table");
+        var rows = table.getElementsByTagName("tr");
+
+        for (var i = 1; i < rows.length; i++) {
+            var id = rows[i].cells[0].textContent.toLowerCase();
+            var name = rows[i].cells[1].textContent.toLowerCase();
+
+            if (id.includes(input) || name.includes(input)) {
+                rows[i].style.display = "";
+            } else {
+                rows[i].style.display = "none";
+            }
+        }
+    }
+
+    function clearInput() {
+    document.getElementById("searchInput").value = "";
+}
+
+</script>
+
+
+
+
+
+
 
 <script>
         var navLinks = document.getElementById("navLinks");

@@ -130,12 +130,12 @@ $conn->close();
 }
 .container{
     background-image:url(bg.png);
-    background-size: cover;
+    background-size: cover ;
     height:100vh;
     width:100%;
     background-position:center;
     background-repeat: no-repeat;
-    padding-top: 10%;
+    padding-top: 4%;
 }
 
 </style>

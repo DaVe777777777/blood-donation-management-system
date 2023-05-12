@@ -46,6 +46,7 @@ $username = $_SESSION['username'];
                         <li><a href="requirements.php">REQUIREMENTS</a></li>
                         <li><a href="donator.php">DONATE</a></li>
                         <li><a href="view_donator.php">REQUEST</a></li>
+                        <li><a href="certificate.php">CERTIFICATE</a></li>
                         <li ><a href="logout.php" class="logout-button">LOGOUT</a></li>
                     </ul>
             </div>
@@ -185,7 +186,7 @@ if(isset($_POST['insert-btn']))
     background-position: center;
     background-size: cover ;
     position: relative;
-    min-height: 10vh;
+    height: 21vh;
 }
 nav {
     display: flex;
@@ -205,7 +206,7 @@ nav img {
 .nav-links ul li {
     list-style: none;
     display: inline-block;
-    padding: 30px 12px;
+    padding: 20px 12px;
     position: relative;
 }
 .nav-links ul li a {

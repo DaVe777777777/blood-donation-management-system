@@ -1,11 +1,38 @@
+<?php
+session_start();
+if (empty($_SESSION['username'])) {
+    header('location:login.php');
+}
+if (!empty($_SESSION['username'])) {
+    $username = $_SESSION['username'];
+}
+
+// Database connection
+include 'connection.php';
+
+// Fetch the username from the database
+$sql = "SELECT username FROM users WHERE username = '$username'";
+$result = $conn->query($sql);
+if ($row = mysqli_fetch_assoc($result)) {
+    $name = $row['username'];
+   
+}
+
+// Field or achievement for the certificate
+$achievement = "Web Development";
+
+// Date of the certificate
+$currentDate = date('F d, Y');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>REQUIREMENTS</title>
-    <link rel="stylesheet" href="requirements.css">
+    <title>CERTIFICATE</title>
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css"
         integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous" />
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
@@ -13,167 +40,99 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-<?php
-session_start();
-if(empty($_SESSION['username']))
-{
-    header('location:login.php');
-}
-if(!empty($_SESSION['username']))
-{
-$username = $_SESSION['username'];
-}
-?>
 <section class="header">
-        <nav>
-            <a href="index.php"><img src="trial.png" /></a>
-            <div class="nav-links" id="navLinks">
-                <i class="bi bi-x-lg" onclick="hideMenu()"></i>
+    <nav>
+        <a href="index.php"><img src="trial.png" /></a>
+        <div class="nav-links" id="navLinks">
+            <i class="bi bi-x-lg" onclick="hideMenu()"></i>
             <ul>
                 <li><a href="index.php">HOME</a></li>
                 <li><a href="requirements.php">REQUIREMENTS</a></li>
                 <li><a href="donator.php">DONATE</a></li>
                 <li><a href="view_donator.php">REQUEST</a></li>
                 <li><a href="certificate.php">CERTIFICATE</a></li>
-                <li ><a href="logout.php" class="logout-button">LOGOUT</a></li>
+                <li><a href="logout.php" class="logout-button">LOGOUT</a></li>
             </ul>
-            </div>
-            <i class="bi bi-list" onclick="showMenu()"></i>
-        </nav>
-        
-        
-</section>
-
-<section class="req">
-        <hr color="red">
-        <hr color="red">
-        <h1>REQUIREMENTS</h1>
-        <hr color="red">
-        <hr color="red">
-        <br>
-        <p>To donate blood, individuals need to achieve certain requirements:</p>
-      
-        <br>
-        <div class="row">
-           
-            <div class="req-col">
-
-                <h2>Age:</h2>
-                <p>Individuals must be at least 17 years old or 16 years old with parental consent in some states.</p>
-            </div>
-            
-            <div class="req-col">
-
-                <h2> Weight:</h2>
-                <p>Donors must weigh at least 110 pounds.</p>
-            </div>
-            
-            <div class="req-col">
-
-                <h2>Health:</h2>
-                <p>Donors must be in good health and not have any contagious diseases.</p>
-            </div>
-            
-            <div class="req-col">
-
-                <h2>Medications:</h2>
-                <p>Some medications may prevent individuals from donating. They should consult with their physician before donating blood.</p>
-            </div>
-
-             <div class="req-col">
-
-                <h2>Travel:</h2>
-                <p>Individuals who have recently traveled to certain countries or regions may not be able to donate due to the risk of disease transmission.</p>
-            </div>
-
-             <div class="req-col">
-
-                <h2>Lifestyle:</h2>
-                <p>Certain lifestyle choices, such as using intravenous drugs, may prevent individuals from donating blood.</p>
-            </div>
-
-             <div class="req-col">
-
-                <h2>Time:</h2>
-                <p>Donors should wait at least eight weeks between whole blood donations and 16 weeks between double red cell donations.</p>
-            </div>
         </div>
+        <i class="bi bi-list" onclick="showMenu()"></i>
+    </nav>
 </section>
 
- <!-- CONTACT -->
- <section class="contact">
-    <?php
- 
-    ?>
-        <h1>DID YOU ACHIEVE IT?</h1>
-        <a href="donator.php" class="hero-btn">DONATE NOW</a>
-<style>
-    /* CONTACT */
+<section class="certificate">
+    <div class="certificate-content">
+        <h1>BLOOD DONATION CERTIFICATE</h1>
+        <p>Congratulations!</p>
+        <p>This certificate is given to:</p>
+        <p>----------------------------------------------------------------</p>
+        <h2><?php echo $name; ?></h2>
+        <p>----------------------------------------------------------------</p>
+        <p>to show our appreciation for donating your blood.</p>
+        <h3> THANK YOU!!!</h3><br>
+        <p>Presented on <?php echo $currentDate; ?></p>
+    </div>
 
-.contact{
-    margin: 100px auto;
-    width: 80%;
-    background-image: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url(poor.jpg);
-    background-position: center;
-    background-size: cover;
-    border-radius: 10px;
-    text-align: center;
-    padding: 100px 0;
-}
-
-.contact h1{
-    color: #fff;
-    margin-bottom: 40px;
-    padding: 0;
-}
-
-@media(max-width: 700px){
-    .contact h1{
-        font-size: 24px;
-    }
-}
-</style>
-
-
+    <div class="text-center">
+        <button onclick="window.print()" class="btn ">Print</button>
+    </div>
 </section>
 
 
 
+
 <style>
-.req{
-    width: 80%;
-    margin: auto;
+.btn {
+    background-color: blue; 
+    color: white; 
+    padding: 12px 24px; 
+    font-size: 16px; 
+    border: none;
+}
+
+.btn:hover {
+    background-color: lightblue; 
+}
+.text-center {
+    margin-top: 20px;
+}
+.certificate {
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.certificate-content {
     text-align: center;
-    padding-top: 100px;
+    border: 2px solid black;
+
+    padding:80px;
+    max-width: 400px;
+    margin: 0 auto;
 }
 
-.req-col{
-    flex-basis: 31%;
-    border-radius: 10px;
-    margin-bottom: 5%;
-    background: #c0392b;
-    padding: 20px 12px;
-    box-sizing: border-box;
-    transition: 0.5s;
+.certificate-content h1 {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color:red;
+    font-style: italic;
 }
 
-
-.req-col p{
-    padding: 0;
-    text-align: center;
-    color: #fff;
-}
-
-.req-col h2{
-    margin-top: 16px;
-    margin-bottom: 15px;
-    text-align: center;
-    color: #fff;
-}
-.req-col:hover{
-    box-shadow: 0 0 20px 0px rgb(229, 255, 0);
+.certificate-content h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 20px 0;
+    font-family: century;
 
 }
+
+.certificate-content p {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
 
 
 * {
@@ -190,7 +149,7 @@ $username = $_SESSION['username'];
     background-size: cover ;
     position: relative;
     height: 21vh;
-    
+
 }
 nav {
     display: flex;

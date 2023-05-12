@@ -35,6 +35,7 @@
                 <li><a href="requirements.php">REQUIREMENTS</a></li>
                 <li><a href="donator.php">DONATE</a></li>
                 <li><a href="view_donator.php">REQUEST</a></li>
+                <li><a href="certificate.php">CERTIFICATE</a></li>
                 <li ><a href="logout.php" class="logout-button">LOGOUT</a></li>
             </ul>
             </div>
@@ -97,13 +98,13 @@ $username = $_SESSION['username'];
                     <a href='update.php?id=".$row['id']."' ' class='btn btn-sm btn-warning'>Update</a>
                     <a href='delete.php?id=".$row['id']."' onclick='return confirm(\"Are you sure?\")' class='btn btn-sm btn-danger'>Delete</a>
                 </td>";
-                echo "<td>";
+                echo "<td class='status-column'>";
                 if ($row['status'] == 2) {
-                    echo "Accept";
+                    echo "<span class='accepted-status'>Accept</span>";
                 } elseif ($row['status'] == 3) {
-                    echo "Reject";
+                    echo "<span class='rejected-status'>Reject</span>";
                 } else {
-                    echo "Pending"; // Default status when value is empty or not 2 or 3
+                    echo "<span class='pending-status'>Pending</span>";
                 }
                 echo "</td>";
             echo "</tr>";
@@ -123,6 +124,28 @@ $username = $_SESSION['username'];
 </div>
 
 <style>
+
+.status-column span {
+    display: inline-block;
+    padding: 6px 12px; 
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.pending-status {
+    background-color: orange;
+    color: white;
+}
+
+.accepted-status {
+    background-color: green;
+    color: white;
+}
+
+.rejected-status {
+    background-color: red;
+    color: white;
+}
 .header {
     
     width: 100%;
@@ -130,7 +153,7 @@ $username = $_SESSION['username'];
     background-position: center;
     background-size: cover ;
     position: relative;
-    min-height: 10vh;
+    height: 21vh;
 }
 nav {
     display: flex;
@@ -149,7 +172,7 @@ nav img {
 .nav-links ul li {
     list-style: none;
     display: inline-block;
-    padding: 30px 12px;
+    padding: 20px 12px;
     position: relative;
 }
 .nav-links ul li a {

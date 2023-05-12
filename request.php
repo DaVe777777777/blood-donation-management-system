@@ -95,16 +95,16 @@ if ($result->num_rows > 0) {
         echo "<td>".$row['age']."</td>";
         echo "<td>".$row['weight']."</td>";
         echo "<td>
-                <a href='update.php?id=".$row['id']."' class='btn btn-sm btn-warning'>Update</a>
-                <a href='delete.php?id=".$row['id']."' onclick='return confirm(\"Are you sure?\")' class='btn btn-sm btn-danger'>Delete</a>
+                <a href='admin_update.php?id=".$row['id']."' class='btn btn-sm btn-warning'>Update</a>
+                <a href='admin_delete.php?id=".$row['id']."' onclick='return confirm(\"Are you sure?\")' class='btn btn-sm btn-danger'>Delete</a>
             </td>";
-            echo "<td>";
+            echo "<td class='status-column'>";
             if ($row['status'] == 2) {
-                echo "Accept";
+                echo "<span class='accepted-status'>Accept</span>";
             } elseif ($row['status'] == 3) {
-                echo "Reject";
+                echo "<span class='rejected-status'>Reject</span>";
             } else {
-                echo "Pending"; // Default status when value is empty or not 2 or 3
+                echo "<span class='pending-status'>Pending</span>";
             }
             echo "</td>";
         echo "<td>
@@ -155,6 +155,27 @@ function updateStatus(id, status) {
 
 
 <style>
+.status-column span {
+    display: inline-block;
+    padding: 6px 12px; 
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.pending-status {
+    background-color: orange;
+    color: white;
+}
+
+.accepted-status {
+    background-color: green;
+    color: white;
+}
+
+.rejected-status {
+    background-color: red;
+    color: white;
+}
 
 
 

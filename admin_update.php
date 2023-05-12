@@ -39,7 +39,7 @@
                     text: "Record has been updated.",
                     icon: "success",
                 }).then(function() {
-                    window.location = "view_donator.php";
+                    window.location = "request.php";
                 });
             </script>
             <?php
@@ -102,7 +102,7 @@
     <input type="number" class="form-control" id="weight" name="weight" value="<?php echo $weight; ?>">
 </div>
 <button type="submit" class="btn btn-primary" name="submit">Update</button>
-<a href="view_donator.php" class="btn btn-danger">Cancel</a>
+<a href="request.php" class="btn btn-danger">Cancel</a>
 </form>
 <?php
 // close the database connection
