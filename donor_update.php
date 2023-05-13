@@ -32,6 +32,8 @@
 
             // construct the update query
             $sql = "UPDATE users SET username='$username', email='$email', mobile='$mobile' WHERE id=$id";
+            $requestUpdateSql = "UPDATE donator SET username='$username' WHERE username=$username";
+            $conn->query($requestUpdateSql);
 
             // execute the query
             // if ($conn->query($sql) === TRUE) {

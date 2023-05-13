@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>REQUEST LIST</title>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="view_donator.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-  
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<title>REQUEST LIST</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="view_donator.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
 
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
     
-   
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css"
@@ -56,16 +56,17 @@
         <table class="table table-striped table-hover table-bordered">
         <tr>
     <th >Id</th>
+    <th >Name</th>
     <th >Blood Type</th>
     <th >Age</th>
     <th >Weight</th>
+    <th>Units</th>
     <th >Actions</th>
     <th >Status</th>
     <th >Actions</th>
 
 
     
-   
 </tr>
 
 <?php
@@ -82,7 +83,6 @@ $username = $_SESSION['username'];
 
 
 
-
 include 'connection.php';
 $sql = "SELECT * FROM donator ORDER BY id DESC";
 $result = $conn->query($sql);
@@ -91,9 +91,11 @@ if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
         echo "<tr>";
         echo "<td>".$row['id']."</td>";
+        echo "<td>".$row['username']."</td>";
         echo "<td>".$row['blood_type']."</td>";
         echo "<td>".$row['age']."</td>";
         echo "<td>".$row['weight']."</td>";
+        echo "<td>".$row['unit']."</td>";
         echo "<td>
                 <a href='admin_update.php?id=".$row['id']."' class='btn btn-sm btn-warning'>Update</a>
                 <a href='admin_delete.php?id=".$row['id']."' onclick='return confirm(\"Are you sure?\")' class='btn btn-sm btn-danger'>Delete</a>
@@ -259,7 +261,7 @@ nav .bi {
 
 
 
-  @media (max-width: 768px) {
+@media (max-width: 768px) {
     .text-box h1 {
         font-size: 20px;
     }

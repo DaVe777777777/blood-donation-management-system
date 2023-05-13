@@ -45,7 +45,7 @@
 
 <br><br>
 <div class="container mt-4">
-    <a href="search.php" class="btn btn-primary">SEARCH<a>
+    <a href="request_search.php" class="btn btn-primary">SEARCH<a>
     <hr color="red">
     <hr color="red">
     <h1 class="text-center">REQUEST LIST</h1>
@@ -56,12 +56,13 @@
     </div>
 
     <div class="table-responsive mt-4">
-        <table class="table table-striped table-hover">
+        <table class="table table-striped table-hover table-bordered">
         <tr>
     <th>Id</th>
     <th>Blood Type</th>
     <th>Age</th>
     <th>Weight</th>
+    <th>Units</th>
     <th>Actions</th>
     <th>Status</th>
 
@@ -85,7 +86,7 @@ $username = $_SESSION['username'];
 
 
     include 'connection.php';
-    $sql = "SELECT * FROM donator ORDER BY id DESC";
+    $sql = "SELECT donator.* FROM donator JOIN users ON donator.username = users.username WHERE users.username = '$username'";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
@@ -94,6 +95,7 @@ $username = $_SESSION['username'];
             echo "<td>".$row['blood_type']."</td>";
             echo "<td>".$row['age']."</td>";
             echo "<td>".$row['weight']."</td>";
+            echo "<td>".$row['unit']."</td>";
             echo "<td>
                     <a href='update.php?id=".$row['id']."' ' class='btn btn-sm btn-warning'>Update</a>
                     <a href='delete.php?id=".$row['id']."' onclick='return confirm(\"Are you sure?\")' class='btn btn-sm btn-danger'>Delete</a>

@@ -14,7 +14,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
     
-   
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css"
@@ -95,6 +94,11 @@ $username = $_SESSION['username'];
       <label>Weight In Pounds:</label>
       <input type="number" class="form-control"  placeholder="weight" name="weight"  required>
     </div>
+
+    <div class="form-group">
+      <label>No of Units:</label>
+      <input type="number" class="form-control"  placeholder="No of units(in ml)" name="unit"  required>
+    </div>
     
     <input type="submit" name="insert-btn" class="btn btn-primary mt-3"/>
     <a href="view_donator.php" class="btn btn-danger mt-3">Cancel<a>
@@ -112,6 +116,7 @@ if(isset($_POST['insert-btn']))
     $blood_type = $_POST['blood_type'];
     $age = $_POST['age'];
     $weight = $_POST['weight'];
+    $unit = $_POST['unit'];
 
     if ($age < 17) {
         echo '<script>
@@ -140,10 +145,10 @@ if(isset($_POST['insert-btn']))
                 });
               </script>';
     } else {
-        $insert = "INSERT INTO donator(blood_type,age,weight) VALUES('$blood_type','$age','$weight')";
+        $insert = "INSERT INTO donator(username,blood_type,age,weight,unit) VALUES('$username','$blood_type','$age','$weight','$unit')";
 
         $run_insert = mysqli_query($conn, $insert);
-
+        
         if ($run_insert === true) {
             echo '<script>
                     Swal.fire({
@@ -323,6 +328,5 @@ nav .bi {
 
 
 
- 
 </body>
 </html>

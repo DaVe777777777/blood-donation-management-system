@@ -51,10 +51,8 @@ $username = $_SESSION['username'];
         <hr color="red">
         <br>
         <p>To donate blood, individuals need to achieve certain requirements:</p>
-      
         <br>
         <div class="row">
-           
             <div class="req-col">
 
                 <h2>Age:</h2>
@@ -78,9 +76,7 @@ $username = $_SESSION['username'];
                 <h2>Medications:</h2>
                 <p>Some medications may prevent individuals from donating. They should consult with their physician before donating blood.</p>
             </div>
-
              <div class="req-col">
-
                 <h2>Travel:</h2>
                 <p>Individuals who have recently traveled to certain countries or regions may not be able to donate due to the risk of disease transmission.</p>
             </div>
@@ -325,6 +321,5 @@ nav .bi {
 
 
 
-   
 </body>
 </html>

@@ -17,7 +17,7 @@
 session_start();
 if(empty($_SESSION['username']))
 {
-    header('location:login.php');
+    header('location:admin_login.php');
 }
 if(!empty($_SESSION['username']))
 {
@@ -45,80 +45,15 @@ $username = $_SESSION['username'];
 
 
 
- <!-- CONTACT -->
- <section class="contact">
-    <?php
- 
-    ?>
-        <h1>DID YOU ACHIEVE IT?</h1>
-        <a href="donator.php" class="hero-btn">DONATE NOW</a>
-<style>
-    /* CONTACT */
-
-.contact{
-    margin: 100px auto;
-    width: 80%;
-    background-image: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url(poor.jpg);
-    background-position: center;
-    background-size: cover;
-    border-radius: 10px;
-    text-align: center;
-    padding: 100px 0;
-}
-
-.contact h1{
-    color: #fff;
-    margin-bottom: 40px;
-    padding: 0;
-}
-
-@media(max-width: 700px){
-    .contact h1{
-        font-size: 24px;
-    }
-}
-</style>
 
 
-</section>
+
 
 
 
 <style>
-.req{
-    width: 80%;
-    margin: auto;
-    text-align: center;
-    padding-top: 100px;
-}
-
-.req-col{
-    flex-basis: 31%;
-    border-radius: 10px;
-    margin-bottom: 5%;
-    background: #c0392b;
-    padding: 20px 12px;
-    box-sizing: border-box;
-    transition: 0.5s;
-}
 
 
-.req-col p{
-    padding: 0;
-    text-align: center;
-    color: #fff;
-}
-
-.req-col h2{
-    margin-top: 16px;
-    margin-bottom: 15px;
-    text-align: center;
-    color: #fff;
-}
-.req-col:hover{
-    box-shadow: 0 0 20px 0px rgb(229, 255, 0);
-
-}
 
 
 * {
@@ -207,7 +142,20 @@ nav .bi {
 
 
 
-  @media (max-width: 768px) {
+@media (max-width: 768px) {
+
+    .container {
+    
+    padding: 5px;
+  }
+
+  .blood-type-container {
+    width: 120px;
+    height: 120px;
+    font-size: 20px;
+    margin: 5px;
+  }
+
     .text-box h1 {
         font-size: 20px;
     }
@@ -271,6 +219,5 @@ nav .bi {
 
 
 
-   
 </body>
 </html>

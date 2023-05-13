@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>REGISTRATION</title>
+  <title>SEARCH</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -45,6 +45,9 @@
                             <th>Blood Type</th>
                             <th>Age</th>
                             <th>Weight</th>
+                            <th>No of Units</th>
+                            <th>Actions</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>';
@@ -54,6 +57,8 @@
                                 <td>'.$row['blood_type'].'</td>
                                 <td>'.$row['age'].'</td>
                                 <td>'.$row['weight'].'</td>
+                                <td>'.$row['unit'].'</td>
+                                
                             </tr>';
                     }
                     echo '</tbody>';
@@ -75,7 +80,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 200px; /* Adjust the height as needed */
+      height: 200px; 
     }
   </style>
 

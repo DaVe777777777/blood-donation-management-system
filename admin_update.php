@@ -26,9 +26,10 @@
         $blood_type = $_POST['blood_type'];
         $age = $_POST['age'];
         $weight = $_POST['weight'];
+        $unit = $_POST['unit'];
 
         // construct the update query
-        $sql = "UPDATE donator SET blood_type='$blood_type', age='$age', weight='$weight', status=1 WHERE id=$id";
+        $sql = "UPDATE donator SET blood_type='$blood_type', age='$age', weight='$weight', unit='$unit', status=1 WHERE id=$id";
 
         // execute the query
         if ($conn->query($sql) === TRUE) {
@@ -65,6 +66,7 @@
             $blood_type = $row['blood_type'];
             $age = $row['age'];
             $weight = $row['weight'];
+            $unit = $row['unit'];
         } else {
             echo "No record found";
         }
@@ -93,18 +95,26 @@
                     <option>O-</option>
                 </select>
             </div>
+
             <div class="form-group">
                 <label for="age">Age:</label>
                 <input type="number" class="form-control" id="age" name="age" value="<?php echo $age; ?>">
             </div>
+
             <div class="form-group">
-    <label for="weight">Weight:</label>
-    <input type="number" class="form-control" id="weight" name="weight" value="<?php echo $weight; ?>">
-</div>
-<button type="submit" class="btn btn-primary" name="submit">Update</button>
-<a href="request.php" class="btn btn-danger">Cancel</a>
-</form>
-<?php
+                <label for="weight">Weight:</label>
+                <input type="number" class="form-control" id="weight" name="weight" value="<?php echo $weight; ?>">
+            </div>
+
+            <div class="form-group">
+                <label for="unit">No of Units:</label>
+                <input type="number" class="form-control" id="unit" name="unit" value="<?php echo $unit; ?>">
+            </div>
+
+            <button type="submit" class="btn btn-primary" name="submit">Update</button>
+            <a href="request.php" class="btn btn-danger">Cancel</a>
+        </form>
+        <?php
 // close the database connection
 $conn->close();
 }
