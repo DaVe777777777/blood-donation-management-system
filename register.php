@@ -19,6 +19,9 @@
             <div class="col-lg-6 col-md-8 col-sm-10">
                 <div class="card">
                     <div class="card-header">
+                    <a class="text-center">
+                        <img src="trial.png" alt="Logo" class="logo">
+                    </a>
                         <h3 class="text-center">Register</h3>
                     </div>
                     <div class="card-body">
@@ -123,22 +126,64 @@ $conn->close();
 ?>
 
 <style>
+
+.logo {
+    width: 80px; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 10px; /* Add some spacing between the logo and heading */
+}
+
 *{
     margin: 0;
     padding: 0;
     box-sizing:border-box;
 }
-.container{
+body{
     background-image:url(bg.png);
-    background-size: cover ;
-    height:100vh;
+    background-size: cover;
+    height:auto;
     width:100%;
     background-position:center;
     background-repeat: no-repeat;
-    padding-top: 4%;
+
+}
+
+.card {
+    box-shadow: 15px 15px black;
+    border-radius: 10px;
+    
+}
+.card-header h3 {
+    font-size: 2.5rem;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 10px;
+}
+
+.form-control {
+    padding: 12px;
+    width: 93%;
+    margin: 15px;
+    border: 1px solid black;
+    outline: none;
+    border-radius: 20px;
+}
+
+.btn {
+    padding: 12px 30px;
+    width: 40%;
+    margin: 40px auto 0;
+    display: block;
+    background-color: blue;
+    color: white;
+    font-weight: bold;
+    border: none;
+    outline: none;
+    border-radius: 20px;
 }
 
 </style>
+
+
 
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
