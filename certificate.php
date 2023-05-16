@@ -67,7 +67,6 @@ $currentDate = date('F d, Y');
         <h2><?php echo $name; ?></h2>
         <p>----------------------------------------------------------------</p>
         <p>to show our appreciation for donating your blood.</p>
-        <h3> THANK YOU!!!</h3><br>
         <p>Presented on <?php echo $currentDate; ?></p>
     </div>
 

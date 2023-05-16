@@ -17,8 +17,6 @@
 </head>
 <body>
 
-   
-
     <div class="container my-5 text-center   ">
     <div class="row justify-content-center ">
         <div class="col-lg-6 col-md-8 col-sm-10 ">
@@ -42,7 +40,7 @@
                         <button type="submit" class="btn btn-primary btn-block">Login</button>
                     </form>
                 </div>
-                <div class="card-footer  ">
+                <div class="card-footer">
                     <p class="text-center">Don't have an account?</p>
                     <p class="text-center"> <a href="admin_register.php">Register here.</a></p>
                 </div>
@@ -115,9 +113,9 @@ $conn->close();
 <style>
 
 .logo {
-    width: 80px; /* Adjust the width as needed */
-    height: auto; /* Maintain aspect ratio */
-    margin-right: 10px; /* Add some spacing between the logo and heading */
+    width: 80px; 
+    height: auto; 
+    margin-right: 10px; 
 }
 
 *{

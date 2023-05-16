@@ -285,12 +285,11 @@ nav .bi {
 
 
 <style>
-    /* FOOTER */
 
 .footer{
     width: 100%;
     text-align: center;
-    padding: 30px 0;
+    padding: 20px 0;
 }
 
 .footer {

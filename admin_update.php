@@ -11,7 +11,7 @@
 
     session_start();
     if (empty($_SESSION['username'])) {
-        header('location:login.php');
+        header('location:admin_login.php');
     }
     if (!empty($_SESSION['username'])) {
         $username = $_SESSION['username'];

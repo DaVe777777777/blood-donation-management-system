@@ -42,39 +42,23 @@
         </nav>
 </section>
 
-<br><br>
+
 <div class="container mt-5">
-   
-    
+<a href="donor_search.php" class="btn btn-primary">SEARCH<a>
     <hr color="red">
     <hr color="red">
     <h1 class="text-center">DONATORS LIST</h1>
     <hr color="red">
     <hr color="red">
 
-    
-    
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <button class="btn btn-primary" type="button" onclick="searchDonators()">
-                <i class="bi bi-search"></i> <!-- Search icon from Bootstrap Icons -->
-            </button>
-            <button class="btn btn-danger" type="button" onclick="clearInput()">
-                <i class="bi bi-x"></i> <!-- X icon from Bootstrap Icons -->
-            </button>
-        </div>
-        <input type="text" id="searchInput" class="form-control" placeholder="Search" >
-    </div>
-    
-    <div class="table-responsive mt-4">
-        <table class="table table-striped table-hover">
-        <tr>
+<div class="table-responsive mt-4">
+    <table class="table table-striped table-hover">
+    <tr>
     <th>Id</th>
     <th>Name</th>
     <th>Email</th>
     <th>Mobile</th>
     <th>Action</th>
-   
 </tr>
 
 <?php
@@ -257,29 +241,7 @@ nav .bi {
 }
 </style>
 
-<script>
-    function searchDonators() {
-        var input = document.getElementById("searchInput").value.toLowerCase();
-        var table = document.querySelector(".table");
-        var rows = table.getElementsByTagName("tr");
 
-        for (var i = 1; i < rows.length; i++) {
-            var id = rows[i].cells[0].textContent.toLowerCase();
-            var name = rows[i].cells[1].textContent.toLowerCase();
-
-            if (id.includes(input) || name.includes(input)) {
-                rows[i].style.display = "";
-            } else {
-                rows[i].style.display = "none";
-            }
-        }
-    }
-
-    function clearInput() {
-    document.getElementById("searchInput").value = "";
-}
-
-</script>
 
 
 

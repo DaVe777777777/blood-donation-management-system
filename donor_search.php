@@ -23,101 +23,71 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&display=swap" rel="stylesheet" />
 </head>
 <body>
+<div class="container my-5">
+    <form method="post" class="mx-auto col-md-6">
+        <div class="form-group text-center">
+            <input class="form-control" type="text" placeholder="Search Donator" name="search">
+        </div>
+        <div class="text-center">
+            <button class="btn btn-primary rounded-pill mr-2" name="submit">Search</button>
+            <a href="donor.php" class="btn btn-danger rounded-pill">Cancel</a>
+        </div>
+    </form>
 
 
-<section class="header">
-        <nav>
-            <a href="index.php"><img src="trial.png" /></a>
-            <div class="nav-links" id="navLinks">
-                <i class="bi bi-x-lg" onclick="hideMenu()"></i>
-            <ul>
-            <li><a href="index.php">HOME</a></li>
-                <li><a href="requirements.php">REQUIREMENTS</a></li>
-                <li><a href="donator.php">DONATE</a></li>
-                <li><a href="view_donator.php">REQUEST</a></li>
-                <li><a href="certificate.php">CERTIFICATE</a></li>
-                <li ><a href="logout.php" class="logout-button">LOGOUT</a></li>
-            </ul>
-            </div>
-            <i class="bi bi-list" onclick="showMenu()"></i>
-        </nav>
-</section>
-
-
-<div class="container mt-4">
-    <a href="view_search.php" class="btn btn-primary">SEARCH<a>
-    <hr color="red">
-    <hr color="red">
-    <h1 class="text-center">REQUEST LIST</h1>
-    <hr color="red">
-    <hr color="red">
-    <div class="d-flex justify-content-end">
-        <a href="donator.php" class="btn btn-primary">Add New Request</a>
-    </div>
+<br>
 
     <div class="table-responsive mt-4">
-        <table class="table table-striped table-hover table-bordered">
+        <table class="table table-striped table-hover">
         <tr>
     <th>Id</th>
-    <th>Blood Type</th>
-    <th>Age</th>
-    <th>Weight</th>
-    <th>Units</th>
-    <th>Actions</th>
-    <th>Status</th>
-
-    
+    <th>Name</th>
+    <th>Email</th>
+    <th>Mobile</th>
+    <th>Action</th>
+   
 </tr>
 
 <?php
-
 session_start();
-if(empty($_SESSION['username']))
-{
-    header('location:login.php');
-}
-if(!empty($_SESSION['username']))
-{
-$username = $_SESSION['username'];
+if (empty($_SESSION['username'])) {
+    header('location: admin_login.php');
+    exit(); // Add exit() to stop executing further code
 }
 
+if (!empty($_SESSION['username'])) {
+    $username = $_SESSION['username'];
+}
 
+include 'connection.php';
 
+if (isset($_POST['submit'])) {
+    $search = $_POST['search'];
 
-    include 'connection.php';
-    $sql = "SELECT donator.* FROM donator JOIN users ON donator.username = users.username WHERE users.username = '$username'";
-    $result = $conn->query($sql);
+    $sql = "SELECT * FROM users WHERE id LIKE '%$search%' OR username LIKE '%$search%'OR email LIKE '$search' OR mobile LIKE '$search'";
+    $result = $conn->query($sql); // Execute the query
+
     if ($result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
+        while ($row = $result->fetch_assoc()) {
             echo "<tr>";
-            echo "<td>".$row['id']."</td>";
-            echo "<td>".$row['blood_type']."</td>";
-            echo "<td>".$row['age']."</td>";
-            echo "<td>".$row['weight']."</td>";
-            echo "<td>".$row['unit']."</td>";
+            echo "<td>" . $row['id'] . "</td>";
+            echo "<td>" . $row['username'] . "</td>";
+            echo "<td>" . $row['email'] . "</td>";
+            echo "<td>" . $row['mobile'] . "</td>";
             echo "<td>
-                    <a href='update.php?id=".$row['id']."' ' class='btn btn-sm btn-warning'>Update</a>
-                    <a href='delete.php?id=".$row['id']."' onclick='return confirm(\"Are you sure?\")' class='btn btn-sm btn-danger'>Delete</a>
+                    <a href='donor_update.php?id=" . $row['id'] . "' class='btn btn-sm btn-warning'>Update</a>
+                    <a href='donor_delete.php?id=" . $row['id'] . "' onclick='return confirm(\"Are you sure?\")' class='btn btn-sm btn-danger'>Delete</a>
                 </td>";
-                echo "<td class='status-column'>";
-                if ($row['status'] == 2) {
-                    echo "<span class='accepted-status'>Accepted</span>";
-                } elseif ($row['status'] == 3) {
-                    echo "<span class='rejected-status'>Rejected</span>";
-                } else {
-                    echo "<span class='pending-status'>Pending</span>";
-                }
-                echo "</td>";
             echo "</tr>";
         }
     } else {
-        echo "<tr><td colspan='10'>No records found</td></tr>";
+        echo "<tr><td colspan='5'>No records found</td></tr>";
     }
-    $conn->close();
+}
 
-
-
+$conn->close();
 ?>
+
 
 
         </table>
@@ -126,27 +96,7 @@ $username = $_SESSION['username'];
 
 <style>
 
-.status-column span {
-    display: inline-block;
-    padding: 6px 12px; 
-    border-radius: 4px;
-    font-weight: bold;
-}
 
-.pending-status {
-    background-color: orange;
-    color: white;
-}
-
-.accepted-status {
-    background-color: green;
-    color: white;
-}
-
-.rejected-status {
-    background-color: red;
-    color: white;
-}
 .header {
     
     width: 100%;
@@ -154,7 +104,7 @@ $username = $_SESSION['username'];
     background-position: center;
     background-size: cover ;
     position: relative;
-    height: 21vh;
+    min-height: 10vh;
 }
 nav {
     display: flex;
@@ -173,8 +123,9 @@ nav img {
 .nav-links ul li {
     list-style: none;
     display: inline-block;
-    padding: 20px 12px;
+    padding: 30px 13px;
     position: relative;
+    
 }
 .nav-links ul li a {
     color: #fff;
@@ -228,14 +179,18 @@ nav .bi {
 
 
   @media (max-width: 768px) {
+
+    
+  
     .text-box h1 {
         font-size: 20px;
     }
     .nav-links ul li {
         display: block;
     }
-    .nav-links {
+    .nav-links{
         position: absolute;
+        
         background: red;
         height: 100vh;
         width: 200px;
@@ -276,6 +231,14 @@ nav .bi {
   background-color: #e74c3c;
 }
 </style>
+
+
+
+
+
+
+
+
 
 <script>
         var navLinks = document.getElementById("navLinks");

@@ -29,7 +29,7 @@
                     <a class="text-center">
                         <img src="trial.png" alt="Logo" class="logo">
                     </a>
-                    <h3 class="text-center">User Login</h3>
+                    <h3 class="text-center">Blood Donation Management System</h3>
                     </div>
                     <div class="card-body">
                         <form action="" method="POST">
@@ -117,9 +117,9 @@ $conn->close();
 <style>
 
 .logo {
-    width: 80px; /* Adjust the width as needed */
-    height: auto; /* Maintain aspect ratio */
-    margin-right: 10px; /* Add some spacing between the logo and heading */
+    width: 80px; 
+    height: auto; 
+    margin-right: 10px;
 }
 
 *{

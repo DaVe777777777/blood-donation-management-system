@@ -53,60 +53,90 @@ $username = $_SESSION['username'];
         </nav>
 </section> 
 
-<br><br>
+<br>
 <div class="container">
-<!-- d-flex justify-content-between -->
-  <div class=" text-center">
-  <hr color="red">
-  <hr color="red">
-  <h2 >DONATE BLOOD</h2>
-  <hr color="red">
-  <hr color="red">
-  <!-- <a href="logout.php" class="btn btn-danger p-3">Logout</a> -->
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="text-center">
+        <hr color="red">
+        <hr color="red">
+        <h2>DONATE BLOOD</h2>
+        <hr color="red">
+        <hr color="red">
+      </div>
+      <form action="" method="post">
+        <div class="form-group">
+          <label for="dropdown">Blood Type:</label>
+          <select id="dropdown" class="form-control" placeholder="Blood Type" name="blood_type" required>
+            <option>--SELECT--</option>
+            <option>A</option>
+            <option>B</option>
+            <option>AB</option>
+            <option>O</option>
+            <option>A+</option>
+            <option>B+</option>
+            <option>AB+</option>
+            <option>O+</option>
+            <option>A-</option>
+            <option>B-</option>
+            <option>AB-</option>
+            <option>O-</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Age:</label>
+          <input type="number" class="form-control" placeholder="Age" name="age" required>
+        </div>
+        <div class="form-group">
+          <label>Weight In Pounds:</label>
+          <input type="number" class="form-control" placeholder="weight" name="weight" required>
+        </div>
+        <div class="form-group">
+          <label>No of Units:</label>
+          <input type="number" class="form-control" placeholder="No of units(in ml)" name="unit" required>
+        </div>
+        <input type="submit" name="insert-btn" class="btn btn-primary mt-3" />
+        <a href="view_donator.php" class="btn btn-danger mt-3">Cancel</a>
+      </form>
+    </div>
+    <div class="col-lg-6 d-flex justify-content-center align-items-center">
+      <img src="arm.jpg" alt="Your Picture" class="img-fluid rounded">
+    </div>
   </div>
-  <form action="" method="post">
-  
-    <div class="form-group">
-      <label for="dropdown">Blood Type:</label>
-      <select id="dropdown"  class="form-control"  placeholder="Blood Type" name="blood_type" required>
-        <option>--SELECT--</option>
-        <option>A</option>
-        <option>B</option>
-        <option>AB</option>
-        <option>O</option>
-        <option>A+</option>
-        <option>B+</option>
-        <option>AB+</option>
-        <option>O+</option>
-        <option>A-</option>
-        <option>B-</option>
-        <option>AB-</option>
-        <option>O-</option>
-      </select>
-    
-    </div>
-    <div class="form-group">
-      <label>Age:</label>
-      <input type="number" class="form-control"  placeholder="Age" name="age"  required>
-    </div>
-
-    <div class="form-group">
-      <label>Weight In Pounds:</label>
-      <input type="number" class="form-control"  placeholder="weight" name="weight"  required>
-    </div>
-
-    <div class="form-group">
-      <label>No of Units:</label>
-      <input type="number" class="form-control"  placeholder="No of units(in ml)" name="unit"  required>
-    </div>
-    
-    <input type="submit" name="insert-btn" class="btn btn-primary mt-3"/>
-    <a href="view_donator.php" class="btn btn-danger mt-3">Cancel<a>
-  </form>
 </div>
+
+<section class="footer">
+<p>&copy; 2023 Blood Donation Management System.</p>
+
+
+<style>
+    /* FOOTER */
+
+.footer{
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    margin-top:15px;
+}
+
+.footer {
+    min-height: 5vh;
+    width: 100%;
+    background-color: red;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}
+.footer p{
+    color: #fff;
+}
+</style>
+</section>
+
+
+
+
 <?php
-
-
 
 $conn = mysqli_connect('localhost','root','','bdm_system');
 
@@ -181,9 +211,6 @@ if(isset($_POST['insert-btn']))
 }
 
 
-
-
-
 .header {
     
     width: 100%;
@@ -202,7 +229,6 @@ nav {
 }
 nav img {
     width: 100px;
-   
 }
 .nav-links {
     flex: 1;
@@ -295,6 +321,12 @@ nav .bi {
         padding: 30px;
     }
 }
+
+@media (max-width: 992px) {
+    .col-lg-6:last-child {
+      margin-top: 2rem;
+    }
+  }
 
 .logout-button {
   display: inline-block;

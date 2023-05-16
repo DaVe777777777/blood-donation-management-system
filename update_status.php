@@ -1,4 +1,13 @@
 <?php
+session_start();
+if(empty($_SESSION['username']))
+{
+    header('location:login.php');
+}
+if(!empty($_SESSION['username']))
+{
+$username = $_SESSION['username'];
+}
 include 'connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

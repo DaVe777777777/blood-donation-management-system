@@ -42,9 +42,9 @@
         </nav>
 </section>
 
-<br><br>
+
 <div class="container mt-4">
-    <a href="search.php" class="btn btn-primary">SEARCH<a>
+    <a href="request_search.php" class="btn btn-primary">SEARCH<a>
     <hr color="red">
     <hr color="red">
     <h1 class="text-center">REQUEST LIST</h1>
@@ -102,9 +102,9 @@ if ($result->num_rows > 0) {
             </td>";
             echo "<td class='status-column'>";
             if ($row['status'] == 2) {
-                echo "<span class='accepted-status'>Accept</span>";
+                echo "<span class='accepted-status'>Accepted</span>";
             } elseif ($row['status'] == 3) {
-                echo "<span class='rejected-status'>Reject</span>";
+                echo "<span class='rejected-status'>Rejected</span>";
             } else {
                 echo "<span class='pending-status'>Pending</span>";
             }
