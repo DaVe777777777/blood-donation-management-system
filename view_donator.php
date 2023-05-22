@@ -1,3 +1,15 @@
+<?php
+session_start();
+if(empty($_SESSION['username']))
+{
+    header('location:login.php');
+}
+if(!empty($_SESSION['username']))
+{
+$username = $_SESSION['username'];
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,6 +48,7 @@
                 <li><a href="donator.php">DONATE</a></li>
                 <li><a href="view_donator.php">REQUEST</a></li>
                 <li><a href="certificate.php">CERTIFICATE</a></li>
+                <li><a href="profile.php">PROFILE</a></li>
                 <li ><a href="logout.php" class="logout-button">LOGOUT</a></li>
             </ul>
             </div>
@@ -70,19 +83,6 @@
 </tr>
 
 <?php
-
-session_start();
-if(empty($_SESSION['username']))
-{
-    header('location:login.php');
-}
-if(!empty($_SESSION['username']))
-{
-$username = $_SESSION['username'];
-}
-
-
-
 
     include 'connection.php';
     $sql = "SELECT donator.* FROM donator JOIN users ON donator.username = users.username WHERE users.username = '$username'";

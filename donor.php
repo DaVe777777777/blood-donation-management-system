@@ -1,3 +1,16 @@
+<?php
+session_start();
+if(empty($_SESSION['username']))
+{
+    header('location:admin_login.php');
+}
+if(!empty($_SESSION['username']))
+{
+$username = $_SESSION['username'];
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,16 +75,6 @@
 </tr>
 
 <?php
-
-session_start();
-if(empty($_SESSION['username']))
-{
-    header('location:admin_login.php');
-}
-if(!empty($_SESSION['username']))
-{
-$username = $_SESSION['username'];
-}
 
     include 'connection.php';
     $sql = "SELECT * FROM users ORDER BY id DESC";

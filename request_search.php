@@ -1,3 +1,18 @@
+<?php
+session_start();
+if(empty($_SESSION['username']))
+{
+    header('location:login.php');
+    exit();
+}
+if(!empty($_SESSION['username']))
+{
+$username = $_SESSION['username'];
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -73,18 +88,6 @@
 </tr>
 
 <?php
-
-session_start();
-if(empty($_SESSION['username']))
-{
-    header('location:login.php');
-    exit();
-}
-if(!empty($_SESSION['username']))
-{
-$username = $_SESSION['username'];
-}
-
 
 include 'connection.php';
 if (isset($_POST['submit'])) {

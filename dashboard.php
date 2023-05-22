@@ -1,18 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>DASHBOARD</title>
-    <link rel="stylesheet" href="requirements.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css"
-        integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous" />
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-</head>
-<body>
 <?php
 session_start();
 if(empty($_SESSION['username']))
@@ -23,10 +8,40 @@ if(!empty($_SESSION['username']))
 {
 $username = $_SESSION['username'];
 }
+
+
+include 'connection.php';
+
+// Fetch the username from the database
+$sql = "SELECT username FROM admin WHERE username = '$username'";
+$result = $conn->query($sql);
+if ($row = mysqli_fetch_assoc($result)) {
+    $name = $row['username'];
+   
+}
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BDMS WEBSITE</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css"
+        integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+
 <section class="header">
         <nav>
-            <a href="dashboard.php"><img src="trial.png" /></a>
+            <a href="index.html"><img src="trial.png" /></a>
             <div class="nav-links" id="navLinks">
                 <i class="bi bi-x-lg" onclick="hideMenu()"></i>
             <ul>
@@ -39,23 +54,19 @@ $username = $_SESSION['username'];
             </div>
             <i class="bi bi-list" onclick="showMenu()"></i>
         </nav>
-        
-        
-</section>
+        <div class="text-box">
+            <h2>WELCOME ADMIN  </h2>
+            <h2>"<?php echo  $name;?>"</h2>
+            <h2>TO</h2>
+            <h1>BLOOD DONATION SYSTEM MANAGEMENT!</h1>
+            <p>DONATE BLOOD, SAVE LIFE.</p>
+            <br />
+            <a href="request.php" class="hero-btn">SEE UPDATES</a>
+        </div>
 
-
-
-
-
-
-
-
-
+    
 <style>
-
-
-
-
+  
 * {
     margin: 0;
     padding: 0;
@@ -63,23 +74,23 @@ $username = $_SESSION['username'];
 }
 
 .header {
-    
-    width: 100%;
-    background-color: red;
+    min-height: 100vh;
+    width: cover;
+    background-image: linear-gradient(rgba(4, 9, 30, 0.7), rgba(4, 9, 30, 0.7)),
+        url(med.png);
     background-position: center;
-    background-size: cover ;
+    background-size: cover;
     position: relative;
-    min-height: 10vh;
 }
+
 nav {
     display: flex;
     padding: 2% 6%;
     justify-content: space-between;
-    align-items: left;
-    
+    align-items: center;
 }
 nav img {
-    width: 100px;
+    width: 150px;
 }
 .nav-links {
     flex: 1;
@@ -88,13 +99,13 @@ nav img {
 .nav-links ul li {
     list-style: none;
     display: inline-block;
-    padding: 30px 12px;
+    padding: 20px 12px;
     position: relative;
 }
 .nav-links ul li a {
     color: #fff;
     text-decoration: none;
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .nav-links ul li a::after {
@@ -141,26 +152,13 @@ nav .bi {
 }
 
 
-
-@media (max-width: 768px) {
-
-    .container {
-    
-    padding: 5px;
-  }
-
-  .blood-type-container {
-    width: 120px;
-    height: 120px;
-    font-size: 20px;
-    margin: 5px;
-  }
-
+    @media (max-width: 768px) {
     .text-box h1 {
         font-size: 20px;
     }
     .nav-links ul li {
         display: block;
+        padding: 20px 12px;
     }
     .nav-links {
         position: absolute;
@@ -185,7 +183,6 @@ nav .bi {
         padding: 30px;
     }
 }
-
 .logout-button {
   display: inline-block;
   padding: 8px 16px;
@@ -206,6 +203,10 @@ nav .bi {
 }
 </style>
 
+</section>
+
+
+
 <script>
         var navLinks = document.getElementById("navLinks");
 
@@ -216,8 +217,6 @@ nav .bi {
             navLinks.style.right = "-200px";
         }
 </script>
-
-
 
 </body>
 </html>

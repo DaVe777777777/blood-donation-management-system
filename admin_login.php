@@ -35,7 +35,7 @@
                         </div>
                         <div class="form-group">
                             <label for="password">Password:</label>
-                            <input type="password" class="form-control" id="password" name="password" required>
+                            <input type="password" class="form-control" id="password" name="password" oninput="this.value= this.value.replace(/\s/g, '')" required>
                         </div>
                         <button type="submit" class="btn btn-primary btn-block">Login</button>
                     </form>
@@ -57,7 +57,7 @@
 session_start();
 
 
-$conn = mysqli_connect('localhost','root','','bdm_system');
+include 'connection.php';
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

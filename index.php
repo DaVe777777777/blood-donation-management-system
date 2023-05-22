@@ -1,3 +1,26 @@
+<?php
+session_start();
+if(empty($_SESSION['username']))
+{
+    header('location:login.php');
+}
+if(!empty($_SESSION['username']))
+{
+$username = $_SESSION['username'];
+}
+
+
+include 'connection.php';
+
+// Fetch the username from the database
+$sql = "SELECT username FROM users WHERE username = '$username'";
+$result = $conn->query($sql);
+if ($row = mysqli_fetch_assoc($result)) {
+    $name = $row['username'];
+   
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,17 +50,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&display=swap" rel="stylesheet" />
 </head>
 <body>
-<?php
-session_start();
-if(empty($_SESSION['username']))
-{
-    header('location:login.php');
-}
-if(!empty($_SESSION['username']))
-{
-$username = $_SESSION['username'];
-}
-?>
+
 
 <section class="header">
         <nav>
@@ -45,19 +58,19 @@ $username = $_SESSION['username'];
             <div class="nav-links" id="navLinks">
                 <i class="bi bi-x-lg" onclick="hideMenu()"></i>
             <ul>
-            <li><a href="index.php">HOME</a></li>
+                <li><a href="index.php">HOME</a></li>
                 <li><a href="requirements.php">REQUIREMENTS</a></li>
                 <li><a href="donator.php">DONATE</a></li>
                 <li><a href="view_donator.php">REQUEST</a></li>
                 <li><a href="certificate.php">CERTIFICATE</a></li>
-
+                <li><a href="profile.php">PROFILE</a></li>
                 <li ><a href="logout.php" class="logout-button">LOGOUT</a></li>
             </ul>
             </div>
             <i class="bi bi-list" onclick="showMenu()"></i>
         </nav>
         <div class="text-box">
-            <h2>WELCOME TO</h2>
+            <h2>WELCOME "<?php echo  $name;?>" TO</h2>
             <h1>BLOOD DONATION SYSTEM MANAGEMENT!</h1>
             <p>DONATE BLOOD, SAVE LIFE.</p>
             <br />
@@ -158,6 +171,7 @@ nav .bi {
     }
     .nav-links ul li {
         display: block;
+        padding: 20px 12px;
     }
     .nav-links {
         position: absolute;

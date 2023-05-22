@@ -1,3 +1,12 @@
+<?php
+session_start();
+            if (empty($_SESSION['username'])) {
+                header('location:login.php');
+            }
+            if (!empty($_SESSION['username'])) {
+                $username = $_SESSION['username'];
+            }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,13 +34,7 @@
     <div class="table-responsive my-5">
         <table class="table">
             <?php
-            session_start();
-            if (empty($_SESSION['username'])) {
-                header('location:login.php');
-            }
-            if (!empty($_SESSION['username'])) {
-                $username = $_SESSION['username'];
-            }
+         
             include 'connection.php';
             if (isset($_POST['submit'])) {
                 $search = $_POST['search'];

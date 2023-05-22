@@ -1,3 +1,13 @@
+<?php
+ session_start();
+ if (empty($_SESSION['username'])) {
+     header('location:admin_login.php');
+ }
+ if (!empty($_SESSION['username'])) {
+     $username = $_SESSION['username'];
+ }
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,14 +18,6 @@
 <body>
     <h2>Update Donator Information</h2>
     <?php
-
-    session_start();
-    if (empty($_SESSION['username'])) {
-        header('location:admin_login.php');
-    }
-    if (!empty($_SESSION['username'])) {
-        $username = $_SESSION['username'];
-    }
 
     include 'connection.php';
 

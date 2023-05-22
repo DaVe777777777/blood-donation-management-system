@@ -1,3 +1,15 @@
+<?php
+session_start();
+if(empty($_SESSION['username']))
+{
+    header('location:login.php');
+}
+if(!empty($_SESSION['username']))
+{
+$username = $_SESSION['username'];
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,17 +25,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-<?php
-session_start();
-if(empty($_SESSION['username']))
-{
-    header('location:login.php');
-}
-if(!empty($_SESSION['username']))
-{
-$username = $_SESSION['username'];
-}
-?>
+
 <section class="header">
         <nav>
             <a href="dashboard.php"><img src="trial.png" /></a>

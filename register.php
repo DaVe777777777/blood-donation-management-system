@@ -32,16 +32,21 @@
                             </div>
                             <div class="form-group">
                                 <label for="email">Email:</label>
-                                <input type="text" class="form-control" id="email" name="email" required>
+                                <input type="text" class="form-control" id="email" name="email" oninput="this.value= this.value.replace(/\s/g, '')" required>
                             </div>
                             <div class="form-group">
                                 <label for="password">Password:</label>
-                                <input type="password" class="form-control" id="password" name="password" required>
+                                <input type="password" class="form-control" id="password" name="password" oninput="this.value= this.value.replace(/\s/g, '')"  required
+                                    pattern="^(?=.*[!@#$%^&*])\S{8,12}$"
+                                    title="Password must be 8-12 characters long and contain at least one special character (!@#$%^&*)">
                             </div>
                             <div class="form-group">
                                 <label for="mobile">Mobile Number:</label>
-                                <input type="text" class="form-control" id="moblie" name="mobile" required>
+                                <input type="text" class="form-control" id="moblie" name="mobile" maxlength="11" oninput="this.value= this.value.replace(/\s/g, '')" required
+                                pattern="^\S{11}$"
+                                title="Mobile should have 11 numbers">
                             </div>
+
                             <button type="submit" class="btn btn-primary btn-block">Register</button>
                         </form>
                     </div>

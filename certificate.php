@@ -18,8 +18,7 @@ if ($row = mysqli_fetch_assoc($result)) {
    
 }
 
-// Field or achievement for the certificate
-$achievement = "Web Development";
+
 
 // Date of the certificate
 $currentDate = date('F d, Y');
@@ -51,6 +50,7 @@ $currentDate = date('F d, Y');
                 <li><a href="donator.php">DONATE</a></li>
                 <li><a href="view_donator.php">REQUEST</a></li>
                 <li><a href="certificate.php">CERTIFICATE</a></li>
+                <li><a href="profile.php">PROFILE</a></li>
                 <li><a href="logout.php" class="logout-button">LOGOUT</a></li>
             </ul>
         </div>
